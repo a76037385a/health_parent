@@ -29,7 +29,7 @@ public class LoginController {
     @PostMapping("/check")
     public Result check(HttpServletResponse resp ,@RequestBody Map map) {
 
-        //System.out.println(map.get("telephone").toString());
+        System.out.println(map.get("telephone").toString());
         //System.out.println(map.get("validateCode").toString());
 
         Result result = loginService.loginCheck(map);
