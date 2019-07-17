@@ -4,11 +4,17 @@ public interface MessageConstant {
     public static final String DELETE_CHECKITEM_FAIL = "删除检查项失败";
     public static final String DELETE_CHECKITEM_SUCCESS = "删除检查项成功";
     public static final String ADD_CHECKITEM_SUCCESS = "新增检查项成功";
+    public static final String ADD_PERMISSION_FAIL = "新增权限项失败";
+    public static final String ADD_PERMISSION_SUCCESS = "新增权限项成功";
     public static final String ADD_CHECKITEM_FAIL = "新增检查项失败";
     public static final String EDIT_CHECKITEM_FAIL = "编辑检查项失败";
     public static final String EDIT_CHECKITEM_SUCCESS = "编辑检查项成功";
     public static final String QUERY_CHECKITEM_SUCCESS = "查询检查项成功";
     public static final String QUERY_CHECKITEM_FAIL = "查询检查项失败";
+    public static final String EDIT_Permission_FAIL = "编辑权限项失败";
+    public static final String EDIT_Permission_SUCCESS = "编辑权限项成功";
+    public static final String QUERY_Permission_SUCCESS = "查询权限项成功";
+    public static final String QUERY_Permission_FAIL = "查询权限项失败";
     public static final String UPLOAD_SUCCESS = "上传成功";
     public static final String ADD_CHECKGROUP_FAIL = "新增检查组失败";
     public static final String ADD_CHECKGROUP_SUCCESS = "新增检查组成功";
