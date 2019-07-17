@@ -18,8 +18,12 @@ public interface MessageConstant {
     public static final String UPLOAD_SUCCESS = "上传成功";
     public static final String ADD_CHECKGROUP_FAIL = "新增检查组失败";
     public static final String ADD_CHECKGROUP_SUCCESS = "新增检查组成功";
+    public static final String ADD_Menu_FAIL = "新增菜单失败";
+    public static final String ADD_Menu_SUCCESS = "新增菜单成功";
     public static final String DELETE_CHECKGROUP_FAIL = "删除检查组失败";
     public static final String DELETE_CHECKGROUP_SUCCESS = "删除检查组成功";
+    public static final String DELETE_Menu_FAIL = "删除菜单失败";
+    public static final String DELETE_Menu_SUCCESS = "删除菜单成功";
     public static final String QUERY_CHECKGROUP_SUCCESS = "查询检查组成功";
     public static final String QUERY_CHECKGROUP_FAIL = "查询检查组失败";
     public static final String EDIT_CHECKGROUP_FAIL = "编辑检查组失败";
@@ -40,10 +44,13 @@ public interface MessageConstant {
     public static final String DELETE_MEMBER_SUCCESS = "删除会员成功";
     public static final String EDIT_MEMBER_FAIL = "编辑会员失败";
     public static final String EDIT_MEMBER_SUCCESS = "编辑会员成功";
+    public static final String EDIT_Menu_FAIL = "编辑菜单失败";
+    public static final String EDIT_Menu_SUCCESS = "编辑菜单成功";
     public static final String TELEPHONE_VALIDATECODE_NOTNULL = "手机号和验证码都不能为空";
     public static final String LOGIN_SUCCESS = "登录成功";
     public static final String VALIDATECODE_ERROR = "验证码输入错误";
     public static final String QUERY_ORDER_SUCCESS = "查询预约信息成功";
+    public static final String QUERY_Menu_SUCCESS = "查询菜单成功";
     public static final String QUERY_ORDER_FAIL = "查询预约信息失败";
     public static final String QUERY_SETMEALLIST_SUCCESS = "查询套餐列表数据成功";
     public static final String QUERY_SETMEALLIST_FAIL = "查询套餐列表数据失败";
@@ -67,4 +74,6 @@ public interface MessageConstant {
     public static final String GET_BUSINESS_REPORT_FAIL = "获取运营统计数据失败";
     public static final String GET_SETMEAL_LIST_SUCCESS = "查询套餐列表数据成功";
     public static final String GET_SETMEAL_LIST_FAIL = "查询套餐列表数据失败";
+
+
 }

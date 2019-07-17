@@ -18,4 +18,41 @@
         ORDER BY priority asc
     </select>
 
+    <insert id="add" parameterType="Menu">
+        insert into t_menu(name,linkUrl,path,priority,icon,description)
+        values
+        (#{name},#{linkUrl},#{path},#{priority},#{icon},#{description})
+    </insert>
+
+    <select id="findPageByCondition" parameterType="string" resultType="Menu">
+        SELECT * FROM t_menu
+        <if test="value != null and value.length > 0">
+            where  name LIKE  #{value}
+        </if>
+    </select>
+
+    <delete id="deleteById" parameterType="int">
+        DELETE FROM t_menu WHERE id=#{id}
+    </delete>
+    <select id="findMenuById" parameterType="int" resultType="Menu">
+        SELECT * FROM t_menu WHERE id=#{id}
+    </select>
+
+    <update id="updateMenu" parameterType="Menu">
+        UPDATE t_menu
+        SET
+        name=#{name},
+        linkUrl=#{linkUrl},
+        path=#{path},
+        priority=#{priority},
+        icon=#{icon},
+        description=#{description}
+        WHERE
+        id=#{id}
+    </update>
+
+    <select id="findCountByMenuId" parameterType="int" resultType="Long">
+        SELECT COUNT(1) FROM t_role_menu WHERE menu_id = #{id};
+    </select>
+
 </mapper>
