@@ -5,6 +5,8 @@ import com.app01.msg.MessageConstant;
 import com.app01.entity.PageResult;
 import com.app01.entity.QueryPageBean;
 import com.app01.entity.Result;
+import com.app01.pojo.Menu;
+import com.app01.pojo.Permission;
 import com.app01.pojo.Role;
 import com.app01.service.RoleService;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,8 +30,8 @@ public class RoleController {
     
 
     @RequestMapping("add")
-    public Result add(@RequestBody Role role){
-        roleService.add(role);
+    public Result add(@RequestBody Role role, Integer[] permissionIds, Integer[] menuIds){
+        roleService.add(role, permissionIds, menuIds);
         return new Result(true, MessageConstant.ADD_ROLE_SUCCESS);
     }
 
@@ -43,13 +45,21 @@ public class RoleController {
 
     @RequestMapping("delete")
     public Result delete(Integer id){
-        roleService.delete(id);
-        return new Result(true, MessageConstant.DELETE_ROLE_SUCCESS);
+        try {
+            roleService.delete(id);
+            return new Result(true, MessageConstant.DELETE_ROLE_SUCCESS);
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+            return new Result(false, e.getMessage());
+        } catch (Exception e){
+            return new Result(false, MessageConstant.DELETE_ROLE_FAIL);
+        }
+
     }
 
     @RequestMapping("update")
-    public Result update(@RequestBody Role role){
-        roleService.update(role);
+    public Result update(@RequestBody Role role, Integer[] permissionIds, Integer[] menuIds){
+        roleService.update(role, permissionIds, menuIds);
         return new Result(true, MessageConstant.EDIT_ROLE_SUCCESS);
     }
 
@@ -64,5 +74,29 @@ public class RoleController {
         List<Role> roles = roleService.findAll();
         System.out.println(roles);
         return new Result(true, MessageConstant.GET_ROLE_SUCCESS, roles);
+    }
+
+    @RequestMapping("findAllPermission")
+    public Result findAllPermission(){
+        List<Permission> permissions = roleService.findAllPermission();
+        return new Result(true, MessageConstant.GET_ROLE_SUCCESS, permissions);
+    }
+
+    @RequestMapping("findPermissionIdsByRoleId")
+    public Result findPermissionIdsByRoleId(Integer id){
+        Integer[] permissionIds = roleService.findPermissionIdsByRoleId(id);
+        return new Result(true, MessageConstant.GET_ROLE_SUCCESS, permissionIds);
+    }
+
+    @RequestMapping("findAllMenu")
+    public Result findAllMenu(){
+        List<Menu> menus = roleService.findAllMenu();
+        return new Result(true, MessageConstant.GET_ROLE_SUCCESS, menus);
+    }
+
+    @RequestMapping("findMenuIdsByRoleId")
+    public Result findMenuIdsByRoleId(Integer id){
+        Integer[] menuIds = roleService.findMenuIdsByRoleId(id);
+        return new Result(true, MessageConstant.GET_ROLE_SUCCESS, menuIds);
     }
 }

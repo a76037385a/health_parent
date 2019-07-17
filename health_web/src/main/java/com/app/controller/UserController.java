@@ -14,7 +14,9 @@ import com.app01.pojo.Menu;
 import com.app01.pojo.Role;
 import com.app01.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,12 +47,14 @@ public class UserController {
     }
 
     @RequestMapping("add")
+    @PreAuthorize("hasAuthority('USER_ADD')")
     public Result add(@RequestBody User user, Integer[] roleIds){
         userService.add(user, roleIds);
         return new Result(true, MessageConstant.ADD_USER_SUCCESS);
     }
 
     @RequestMapping("findPage")
+    @PreAuthorize("hasAuthority('USER_QUERY')")
     public PageResult findPage(@RequestBody QueryPageBean queryPageBean){
         PageResult pageResult = userService.pageQuery(queryPageBean.getCurrentPage(), queryPageBean.getPageSize(),
                 queryPageBean.getQueryString());
@@ -59,6 +63,8 @@ public class UserController {
     }
 
     @RequestMapping("delete")
+    @Transactional
+    @PreAuthorize("hasAuthority('USER_DELETE')")
     public Result delete(String username){
         try {
             userService.delete(username);
@@ -73,18 +79,22 @@ public class UserController {
     }
 
     @RequestMapping("update")
+    @Transactional
+    @PreAuthorize("hasAuthority('USER_EDIT')")
     public Result update(@RequestBody User user, Integer[] roleIds){
         userService.update(user, roleIds);
         return new Result(true, MessageConstant.EDIT_USER_SUCCESS);
     }
 
     @RequestMapping("findById")
+    @PreAuthorize("hasAuthority('USER_QUERY')")
     public Result findById(Integer id){
         User user = userService.findById(id);
         return new Result(true, MessageConstant.GET_USER_SUCCESS, user);
     }
 
     @RequestMapping("findAll")
+    @PreAuthorize("hasAuthority('USER_QUERY')")
     public Result findAll(){
         List<User> users = userService.findAll();
         System.out.println(users);
@@ -92,16 +102,19 @@ public class UserController {
     }
 
     @RequestMapping("findRoleIdsByUserId")
+    @PreAuthorize("hasAuthority('USER_QUERY')")
     public Result findRoleIdsByUserId(Integer id){
         Integer[] roleIds = userService.findRoleIdsByUserId(id);
         return new Result(true, MessageConstant.GET_ROLE_SUCCESS, roleIds);
     }
 
     @RequestMapping("findByUsername")
+    @PreAuthorize("hasAuthority('USER_QUERY')")
     public Result findByUsername(String username){
         User user = userService.findByUsername(username);
         return new Result(true, MessageConstant.GET_USER_SUCCESS, user);
     }
+
     @GetMapping("/getUserMenuByUsername")
     public Result getUserMenuByUsername(String name) {
         System.out.println(name);

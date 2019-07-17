@@ -4,7 +4,6 @@
 
 
 <mapper namespace="com.app.dao.UserDao">
-
     <select id="findUserByUsername" parameterType="String" resultType="User">
         SELECT * FROM t_user
         WHERE username = #{username}
@@ -16,8 +15,8 @@
         (#{birthday},#{gender},#{username},#{password},#{remark},#{station},#{telephone})
     </insert>
 
-    <select id="findByCondition" parameterType="string" resultType="user">
-        select * from t_user
+    <select id="findByCondition" parameterType="string" resultMap="userMap">
+        select u.*, t.role_id, t.role_name from t_user u LEFT JOIN (select r.id as role_id, r.name as role_name, ur.user_id from t_role r, t_user_role ur where r.id = ur.role_id) t on u.id = t.user_id
         <if test="value != null and value.length > 0">
             <where>
                 and username like #{value}

@@ -11,19 +11,20 @@
     </select>
 
     <!--add begin by FreezuWu-->
-    <insert id="add" parameterType="role">
+    <insert id="add" parameterType="role" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
         insert into t_role(name,keyword,description) values
         (#{name},#{keyword},#{description})
     </insert>
 
-    <select id="findByCondition" parameterType="string" resultMap="userMap">
-        select u.*, r.id as role_id, r.name as role_name from t_user u, t_user_role ur, t_role r where u.id = ur.user_id and ur.role_id = r.id
+    <select id="findByCondition" parameterType="string" resultType="role">
+        select * from t_role
         <if test="value != null and value.length > 0">
             <where>
-                and u.username like #{value}
+                and name like #{value} or keyword like #{value}
             </where>
         </if>
     </select>
+
     <resultMap id="userMap" type="user">
         <id property="id" column="id"/>
         <result property="birthday" column="birthday"/>
@@ -39,7 +40,7 @@
 
     </resultMap>
 
-    <delete id="deleteById" parameterType="int">
+    <delete id="delete" parameterType="int">
         delete from t_role where id = #{id}
     </delete>
 
@@ -57,5 +58,37 @@
     <select id="findAll" resultType="role">
         select * from t_role
     </select>
+
+    <select id="findAllPermission" resultType="permission">
+        select * from t_permission
+    </select>
+
+    <select id="findAllMenu" resultType="permission">
+        select * from t_menu
+    </select>
+
+    <select id="findPermissionIdsByRoleId" parameterType="int" resultType="int">
+        select permission_id from t_role_permission where role_id = #{role_id}
+    </select>
+
+    <select id="findMenuIdsByRoleId" parameterType="int" resultType="int">
+        select menu_id from t_role_menu where role_id = #{role_id}
+    </select>
+
+    <insert id="setRoleAndPermission" parameterType="hashmap">
+        insert into t_role_permission values (#{role_id}, #{permission_id})
+    </insert>
+
+    <delete id="deleteRoleAndPermission" parameterType="integer">
+        delete from t_role_permission where role_id = #{id}
+    </delete>
+
+    <insert id="setRoleAndMenu" parameterType="hashmap">
+        insert into t_role_menu values (#{role_id}, #{menu_id})
+    </insert>
+
+    <delete id="deleteRoleAndMenu" parameterType="integer">
+        delete from t_role_menu where role_id = #{id}
+    </delete>
     <!--add end by FreezuWu-->
 </mapper>
