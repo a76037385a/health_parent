@@ -6,6 +6,7 @@ import com.app01.entity.PageResult;
 import com.app01.entity.QueryPageBean;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.app01.entity.Result;
+import com.app01.pojo.User;
 import com.app01.msg.MessageConstant;
 import com.app01.pojo.User;
 import com.app01.service.UserService;
