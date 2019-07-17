@@ -5,6 +5,7 @@ import com.app.dao.MenuDao;
 import com.app.dao.PermissionDao;
 import com.app.dao.RoleDao;
 import com.app.dao.UserDao;
+import com.app01.entity.Result;
 import com.app01.pojo.Menu;
 import com.app01.pojo.Permission;
 import com.app01.pojo.Role;
@@ -65,21 +66,34 @@ public class UserServiceImpl implements UserService {
             user.setRoles(roles);
         }
 
-
-
         return user;
     }
 
-    public Boolean isNullOrEmpty(Set set) {
+//    @Override
+//    public Result findMenuByUsername(String name) {
+//        User user = userDao.findUserByUsername(name);
+//        if (user == null){
+//            return null;
+//        }
+//        //查找 用户组
+//        Set<Role> roles = roleDao.findRolesByUserId(user.getId());
+//        if(roles != null && roles.size() > 0){
+//            for (Role role : roles){
+//                int roleId = role.getId();
+//                //根据roleId查找菜单权限
+//                LinkedHashSet<Menu> menus = menuDao.findMenusByRoleId(roleId);
+//                if(menus != null && menus.size()>0){
+//                    for (Menu menu : menus) {
+//                        List<Menu> cmenu = menuDao.findMenusByMenuId(menu.getId());
+//                        menu.setChildren(cmenu);
+//                    }
+//                    role.setMenus(menus);
+//                }
+//            }
+//        }
+//
+//        return null;
+//    }
 
-        if(set == null){
-            return false;
-        }
 
-        if(set.size() == 0){
-            return false;
-        }
-
-        return null;
-    }
 }
