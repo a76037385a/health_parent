@@ -45,6 +45,7 @@
                                 </el-dropdown-item>
                                 <el-dropdown-item divided>
                                         <span style="display:block;" @click="logout">退出</span>
+                                       
                                     </el-dropdown-item>
                             </el-dropdown-menu>
                         </el-dropdown>
@@ -57,11 +58,11 @@
                         <el-submenu v-for="menu in menuList" :index="menu.path">
                             <template slot="title">
                                 <i class="fa" :class="menu.icon"></i>
-                                {{menu.title}}
+                                {{menu.name}}
                             </template>
                             <template v-for="child in menu.children">
                                 <el-menu-item :index="child.path">
-                                    <a :href="child.linkUrl" target="right">{{child.title}}</a>
+                                    <a :href="child.linkUrl" target="right">{{child.name}}</a>
                                 </el-menu-item>
                             </template>
                         </el-submenu>
@@ -239,6 +240,7 @@
                     console.log(resp)
                     if(resp.data.flag){
                         this.username = resp.data.data;
+                        this.getUserMenuByUsername();
                     }else{
                         this.$message.error("返回错误")
                     }
@@ -249,10 +251,25 @@
                 } )
 
             },
+            getUserMenuByUsername(){
+                var url = `/user/getUserMenuByUsername.do?name=${this.username}`
+                axios.get(url)
+                .then( resp=>{
+                    if(resp.data.flag){
+                        console.log(resp.data.data)
+                        this.menuList = resp.data.data
+                    }else{
+                        this.$message.error(resp.data.message)
+                    }
+                })
+                .catch(err=>{
+                    this.$message.error('网络请求发生错误,请稍后重试')
+                })
+            },
 
 
             logout(){
-                window.location.href = "logout.do"
+                window.location.href = "../logout.do"
             }
         }
     });

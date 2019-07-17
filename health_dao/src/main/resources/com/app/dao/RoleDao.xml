@@ -9,4 +9,53 @@
       FROM t_role as rol, t_user_role as url
       WHERE rol.id = url.role_id and url.user_id = #{userId}
     </select>
+
+    <!--add begin by FreezuWu-->
+    <insert id="add" parameterType="role">
+        insert into t_role(name,keyword,description) values
+        (#{name},#{keyword},#{description})
+    </insert>
+
+    <select id="findByCondition" parameterType="string" resultMap="userMap">
+        select u.*, r.id as role_id, r.name as role_name from t_user u, t_user_role ur, t_role r where u.id = ur.user_id and ur.role_id = r.id
+        <if test="value != null and value.length > 0">
+            <where>
+                and u.username like #{value}
+            </where>
+        </if>
+    </select>
+    <resultMap id="userMap" type="user">
+        <id property="id" column="id"/>
+        <result property="birthday" column="birthday"/>
+        <result property="gender" column="gender"/>
+        <result property="username" column="username"/>
+        <result property="remark" column="remark"/>
+        <result property="station" column="station"/>
+        <result property="telephone" column="telephone"/>
+        <collection property="roles" ofType="role" javaType="collection" column="role_id">
+            <id property="id" column="role_id"/>
+            <result property="name" column="role_name"/>
+        </collection>
+
+    </resultMap>
+
+    <delete id="deleteById" parameterType="int">
+        delete from t_role where id = #{id}
+    </delete>
+
+    <select id="findById" parameterType="int" resultType="role">
+        select * from t_role where id = #{id}
+    </select>
+
+    <update id="update" parameterType="role">
+        update t_role
+        set
+            name=#{name},keyword=#{keyword},description=#{description}
+        where id = #{id}
+    </update>
+
+    <select id="findAll" resultType="role">
+        select * from t_role
+    </select>
+    <!--add end by FreezuWu-->
 </mapper>
