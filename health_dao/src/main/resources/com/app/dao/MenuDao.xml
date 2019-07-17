@@ -7,15 +7,51 @@
     <select id="findMenusByRoleId" parameterType="int" resultType="Menu">
         SELECT m.*
         FROM t_role_menu rm, t_menu m
-        WHERE rm.menu_id = m.id and level = 1 and rm.role_id = #{roleId}
-        ORDER BY priority asc
+        WHERE rm.role_id = #{roleId} and rm.menu_id = m.id and m.level = 1
+        ORDER BY m.id
     </select>
 
     <select id="findMenusByMenuId" parameterType="int" resultType="Menu">
         SELECT m.*
-        FROM t_menu m
-        WHERE level = 2 and parentMenuId = #{menuid}
-        ORDER BY priority asc
+        FROM t_role_menu rm, t_menu m
+        WHERE rm.role_id = #{roleId} and rm.menu_id = m.id and m.level = 2 and m.parentMenuId = #{parentMenuId}
+    </select>
+
+    <insert id="add" parameterType="Menu">
+        insert into t_menu(name,linkUrl,path,priority,icon,description)
+        values
+        (#{name},#{linkUrl},#{path},#{priority},#{icon},#{description})
+    </insert>
+
+    <select id="findPageByCondition" parameterType="string" resultType="Menu">
+        SELECT * FROM t_menu
+        <if test="value != null and value.length > 0">
+            where  name LIKE  #{value}
+        </if>
+    </select>
+
+    <delete id="deleteById" parameterType="int">
+        DELETE FROM t_menu WHERE id=#{id}
+    </delete>
+    <select id="findMenuById" parameterType="int" resultType="Menu">
+        SELECT * FROM t_menu WHERE id=#{id}
+    </select>
+
+    <update id="updateMenu" parameterType="Menu">
+        UPDATE t_menu
+        SET
+        name=#{name},
+        linkUrl=#{linkUrl},
+        path=#{path},
+        priority=#{priority},
+        icon=#{icon},
+        description=#{description}
+        WHERE
+        id=#{id}
+    </update>
+
+    <select id="findCountByMenuId" parameterType="int" resultType="Long">
+        SELECT COUNT(1) FROM t_role_menu WHERE menu_id = #{id};
     </select>
 
 </mapper>

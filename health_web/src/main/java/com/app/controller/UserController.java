@@ -120,6 +120,7 @@ public class UserController {
         System.out.println(name);
         try {
             com.app01.pojo.User user = userService.findUserByUsername(name);
+            System.out.println(user.getUsername());
             LinkedHashSet<Menu> menus = null;
             Set<Role> roleSet = user.getRoles();
             if(roleSet != null && roleSet.size()>0){
