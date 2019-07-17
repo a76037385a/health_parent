@@ -50,17 +50,18 @@ public class UserServiceImpl implements UserService {
         if(roles != null && roles.size() > 0){
             for (Role role : roles) {
                 int roleId = role.getId();
-
+                System.out.println(roleId);
                 //查找操作权限
                 Set<Permission> permissions = permissionDao.findByRoleId(roleId);
                 if(permissions != null && permissions.size()>0){
                     role.setPermissions(permissions);
                 }
                 //查找菜单权限
+
                 LinkedHashSet<Menu> menus = menuDao.findMenusByRoleId(roleId);
                 if(menus != null && menus.size()>0){
                     for (Menu menu : menus) {
-                        List<Menu> cmenu = menuDao.findMenusByMenuId(menu.getId());
+                        List<Menu> cmenu = menuDao.findMenusByMenuId(roleId,menu.getId());
                         menu.setChildren(cmenu);
                     }
                     role.setMenus(menus);
@@ -69,8 +70,6 @@ public class UserServiceImpl implements UserService {
             }
             user.setRoles(roles);
         }
-
-
 
         return user;
     }

@@ -7,15 +7,14 @@
     <select id="findMenusByRoleId" parameterType="int" resultType="Menu">
         SELECT m.*
         FROM t_role_menu rm, t_menu m
-        WHERE rm.menu_id = m.id and level = 1 and rm.role_id = #{roleId}
-        ORDER BY priority asc
+        WHERE rm.role_id = #{roleId} and rm.menu_id = m.id and m.level = 1
+        ORDER BY m.id
     </select>
 
     <select id="findMenusByMenuId" parameterType="int" resultType="Menu">
         SELECT m.*
-        FROM t_menu m
-        WHERE level = 2 and parentMenuId = #{menuid}
-        ORDER BY priority asc
+        FROM t_role_menu rm, t_menu m
+        WHERE rm.role_id = #{roleId} and rm.menu_id = m.id and m.level = 2 and m.parentMenuId = #{parentMenuId}
     </select>
 
 </mapper>
