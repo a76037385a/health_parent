@@ -4,11 +4,17 @@ public interface MessageConstant {
     public static final String DELETE_CHECKITEM_FAIL = "删除检查项失败";
     public static final String DELETE_CHECKITEM_SUCCESS = "删除检查项成功";
     public static final String ADD_CHECKITEM_SUCCESS = "新增检查项成功";
+    public static final String ADD_PERMISSION_FAIL = "新增权限项失败";
+    public static final String ADD_PERMISSION_SUCCESS = "新增权限项成功";
     public static final String ADD_CHECKITEM_FAIL = "新增检查项失败";
     public static final String EDIT_CHECKITEM_FAIL = "编辑检查项失败";
     public static final String EDIT_CHECKITEM_SUCCESS = "编辑检查项成功";
     public static final String QUERY_CHECKITEM_SUCCESS = "查询检查项成功";
     public static final String QUERY_CHECKITEM_FAIL = "查询检查项失败";
+    public static final String EDIT_Permission_FAIL = "编辑权限项失败";
+    public static final String EDIT_Permission_SUCCESS = "编辑权限项成功";
+    public static final String QUERY_Permission_SUCCESS = "查询权限项成功";
+    public static final String QUERY_Permission_FAIL = "查询权限项失败";
     public static final String UPLOAD_SUCCESS = "上传成功";
     public static final String ADD_CHECKGROUP_FAIL = "新增检查组失败";
     public static final String ADD_CHECKGROUP_SUCCESS = "新增检查组成功";
@@ -61,4 +67,22 @@ public interface MessageConstant {
     public static final String GET_BUSINESS_REPORT_FAIL = "获取运营统计数据失败";
     public static final String GET_SETMEAL_LIST_SUCCESS = "查询套餐列表数据成功";
     public static final String GET_SETMEAL_LIST_FAIL = "查询套餐列表数据失败";
+    //add begin by FreezeWu
+    public static final String ADD_USER_SUCCESS = "新增用户成功";
+    public static final String DELETE_USER_SUCCESS = "删除用户成功";
+    public static final String GET_USER_SUCCESS = "查询用户成功";
+    public static final String EDIT_USER_SUCCESS = "更新用户成功";
+    public static final String ADD_ROLE_SUCCESS = "新增角色成功";
+    public static final String DELETE_ROLE_SUCCESS = "删除角色成功";
+    public static final String EDIT_ROLE_SUCCESS = "更新角色成功";
+    public static final String GET_ROLE_SUCCESS = "查询角色成功";
+    public static final String ADD_USER_FAIL = "新增用户失败";
+    public static final String DELETE_USER_FAIL = "删除用户失败";
+    public static final String GET_USER_FAIL = "查询用户失败";
+    public static final String EDIT_USER_FAIL = "更新用户失败";
+    public static final String ADD_ROLE_FAIL = "新增角色失败";
+    public static final String DELETE_ROLE_FAIL = "删除角色失败";
+    public static final String EDIT_ROLE_FAIL = "更新角色失败";
+    public static final String GET_ROLE_FAIL = "查询角色失败";
+    //add end by FreezeWu
 }
