@@ -61,4 +61,22 @@ public interface MessageConstant {
     public static final String GET_BUSINESS_REPORT_FAIL = "获取运营统计数据失败";
     public static final String GET_SETMEAL_LIST_SUCCESS = "查询套餐列表数据成功";
     public static final String GET_SETMEAL_LIST_FAIL = "查询套餐列表数据失败";
+    //add begin by FreezeWu
+    public static final String ADD_USER_SUCCESS = "新增用户成功";
+    public static final String DELETE_USER_SUCCESS = "删除用户成功";
+    public static final String GET_USER_SUCCESS = "查询用户成功";
+    public static final String EDIT_USER_SUCCESS = "更新用户成功";
+    public static final String ADD_ROLE_SUCCESS = "新增角色成功";
+    public static final String DELETE_ROLE_SUCCESS = "删除角色成功";
+    public static final String EDIT_ROLE_SUCCESS = "更新角色成功";
+    public static final String GET_ROLE_SUCCESS = "查询角色成功";
+    public static final String ADD_USER_FAIL = "新增用户失败";
+    public static final String DELETE_USER_FAIL = "删除用户失败";
+    public static final String GET_USER_FAIL = "查询用户失败";
+    public static final String EDIT_USER_FAIL = "更新用户失败";
+    public static final String ADD_ROLE_FAIL = "新增角色失败";
+    public static final String DELETE_ROLE_FAIL = "删除角色失败";
+    public static final String EDIT_ROLE_FAIL = "更新角色失败";
+    public static final String GET_ROLE_FAIL = "查询角色失败";
+    //add end by FreezeWu
 }
