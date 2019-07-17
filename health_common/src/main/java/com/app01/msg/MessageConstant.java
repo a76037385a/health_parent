@@ -91,5 +91,7 @@ public interface MessageConstant {
     public static final String DELETE_ROLE_FAIL = "删除角色失败";
     public static final String EDIT_ROLE_FAIL = "更新角色失败";
     public static final String GET_ROLE_FAIL = "查询角色失败";
+    public static final String DELETE_PERMISSION_FAIL = "删除权限失败";
+    public static final String DELETE_PERMISSION_SUCCESS = "删除权限成功";
     //add end by FreezeWu
 }

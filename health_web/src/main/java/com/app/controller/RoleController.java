@@ -9,6 +9,7 @@ import com.app01.pojo.Menu;
 import com.app01.pojo.Permission;
 import com.app01.pojo.Role;
 import com.app01.service.RoleService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,12 +31,14 @@ public class RoleController {
     
 
     @RequestMapping("add")
+    @PreAuthorize("hasAuthority('ROLE_ADD')")
     public Result add(@RequestBody Role role, Integer[] permissionIds, Integer[] menuIds){
         roleService.add(role, permissionIds, menuIds);
         return new Result(true, MessageConstant.ADD_ROLE_SUCCESS);
     }
 
     @RequestMapping("findPage")
+    @PreAuthorize("hasAuthority('ROLE_QUERY')")
     public PageResult findPage(@RequestBody QueryPageBean queryPageBean){
         PageResult pageResult = roleService.pageQuery(queryPageBean.getCurrentPage(), queryPageBean.getPageSize(),
                 queryPageBean.getQueryString());
@@ -44,6 +47,7 @@ public class RoleController {
     }
 
     @RequestMapping("delete")
+    @PreAuthorize("hasAuthority('ROLE_DELETE')")
     public Result delete(Integer id){
         try {
             roleService.delete(id);
@@ -58,18 +62,21 @@ public class RoleController {
     }
 
     @RequestMapping("update")
+    @PreAuthorize("hasAuthority('ROLE_EDIT')")
     public Result update(@RequestBody Role role, Integer[] permissionIds, Integer[] menuIds){
         roleService.update(role, permissionIds, menuIds);
         return new Result(true, MessageConstant.EDIT_ROLE_SUCCESS);
     }
 
     @RequestMapping("findById")
+    @PreAuthorize("hasAuthority('ROLE_QUERY')")
     public Result findById(Integer id){
         Role role = roleService.findById(id);
         return new Result(true, MessageConstant.GET_ROLE_SUCCESS, role);
     }
 
     @RequestMapping("findAll")
+    @PreAuthorize("hasAuthority('ROLE_QUERY')")
     public Result findAll(){
         List<Role> roles = roleService.findAll();
         System.out.println(roles);
@@ -89,12 +96,14 @@ public class RoleController {
     }
 
     @RequestMapping("findAllMenu")
+    @PreAuthorize("hasAuthority('MENU_QUERY')")
     public Result findAllMenu(){
         List<Menu> menus = roleService.findAllMenu();
         return new Result(true, MessageConstant.GET_ROLE_SUCCESS, menus);
     }
 
     @RequestMapping("findMenuIdsByRoleId")
+    @PreAuthorize("hasAuthority('MENU_QUERY')")
     public Result findMenuIdsByRoleId(Integer id){
         Integer[] menuIds = roleService.findMenuIdsByRoleId(id);
         return new Result(true, MessageConstant.GET_ROLE_SUCCESS, menuIds);

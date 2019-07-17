@@ -11,6 +11,7 @@ import com.app01.pojo.Menu;
 import com.app01.pojo.Permission;
 import com.app01.service.MenuService;
 import com.app01.service.PermissionService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -21,6 +22,7 @@ public class MenuController {
     MenuService menuService;
 
     @PostMapping("/add")
+    @PreAuthorize("hasAuthority('MENU_ADD')")
     public Result addMenu(@RequestBody Menu menu) {
         try {
             //do service
@@ -34,12 +36,14 @@ public class MenuController {
     }
 
     @PostMapping("/findPage")
+    @PreAuthorize("hasAuthority('MENU_QUERY')")
     public PageResult findPage(@RequestBody QueryPageBean queryPageBean) {
         PageResult pageResult = menuService.findPageByCondition(queryPageBean);
         return pageResult;
     }
 ////
     @GetMapping("/deleteRow")
+    @PreAuthorize("hasAuthority('MENU_DELETE')")
     public Result deleteRow(int id) {
         try {
            menuService.deleteMenuById(id);
@@ -52,12 +56,14 @@ public class MenuController {
     }
 ////
     @GetMapping("/findById")
+    @PreAuthorize("hasAuthority('MENU_QUERY')")
     public Result findById(int id) {
         Menu menu = menuService.findMenuById(id);
         return new Result(true,MessageConstant.QUERY_Menu_SUCCESS,menu);
     }
 ////
     @PostMapping("/editMenuById")
+    @PreAuthorize("hasAuthority('MENU_EDIT')")
     public Result editMenuById(@RequestBody Menu menu) {
         try {
            menuService.editMenuById(menu);

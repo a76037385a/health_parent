@@ -47,9 +47,9 @@ public class PermissionController {
         }catch (RuntimeException e){
             return new Result(false,e.getMessage());
         }catch (Exception e){
-            return new Result(false,MessageConstant.DELETE_CHECKITEM_FAIL);
+            return new Result(false,MessageConstant.DELETE_PERMISSION_FAIL);
         }
-        return new Result(true,MessageConstant.DELETE_CHECKITEM_SUCCESS);
+        return new Result(true,MessageConstant.DELETE_PERMISSION_SUCCESS);
     }
 //
     @GetMapping("/findById")
