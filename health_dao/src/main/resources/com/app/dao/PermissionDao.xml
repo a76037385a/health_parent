@@ -8,4 +8,36 @@
         FROM t_permission p, t_role_permission rlp
         WHERE rlp.role_id = #{roleId} and rlp.permission_id = p.id
     </select>
+    <insert id="add" parameterType="Permission">
+        insert into t_permission(name,keyword,description)
+        values
+        (#{name},#{keyword},#{description})
+    </insert>
+    <select id="findPageByCondition" parameterType="string" resultType="Permission">
+        SELECT * FROM t_permission
+        <if test="value != null and value.length > 0">
+            where keyword LIKE #{value} or name LIKE  #{value}
+        </if>
+    </select>
+    <delete id="deleteById" parameterType="int">
+        DELETE FROM t_permission WHERE id=#{id}
+    </delete>
+
+    <select id="findCountByPermissionId" parameterType="int" resultType="Long">
+        SELECT COUNT(1) FROM t_role_permission WHERE permission_id = #{id};
+    </select>
+
+    <select id="findPermissionById" parameterType="int" resultType="Permission">
+        SELECT * FROM t_Permission WHERE id=#{id}
+    </select>
+
+    <update id="updatePermission" parameterType="Permission">
+        UPDATE t_permission
+        SET
+        name=#{name},
+        keyword=#{keyword},
+        description=#{description}
+        WHERE
+        id=#{id}
+    </update>
 </mapper>

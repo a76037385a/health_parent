@@ -91,12 +91,13 @@
         },
         methods:{
             findById(){
-                var url = `/setmeal/findPackgeInfosById.do?id=${id}`
+                var url = `/setmeal/findPackgeInfosByid.do?id=${id}`
                 axios.get(url)
                 .then( resp=>{
                     
-                    this.imgUrl = resp.data.img;
-                    this.setmeal = resp.data
+
+                    this.setmeal = resp.data.data;
+                    this.imgUrl = resp.setmeal.img;
 
                 })
                 .catch( err=>{
