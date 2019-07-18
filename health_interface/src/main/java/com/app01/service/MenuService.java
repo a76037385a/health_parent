@@ -8,8 +8,7 @@ import com.app01.pojo.Permission;
 public interface MenuService {
 
 
-    void add(Menu menu);
-
+    void add(Menu menu, String menuLevel);
 
     PageResult findPageByCondition(QueryPageBean queryPageBean);
 
@@ -17,5 +16,5 @@ public interface MenuService {
 
     Menu findMenuById(int id);
 
-    void editMenuById(Menu menu);
+    void editMenuById(Menu menu, String menuLevel);
 }

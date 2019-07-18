@@ -23,10 +23,10 @@ public class MenuController {
 
     @PostMapping("/add")
     @PreAuthorize("hasAuthority('MENU_ADD')")
-    public Result addMenu(@RequestBody Menu menu) {
+    public Result addMenu(@RequestBody Menu menu, String menuLevel) {
         try {
             //do service
-            menuService.add(menu);
+            menuService.add(menu, menuLevel);
         }catch (Exception e){
             e.printStackTrace();
             return new Result(false,MessageConstant.ADD_Menu_FAIL);
@@ -64,9 +64,9 @@ public class MenuController {
 ////
     @PostMapping("/editMenuById")
     @PreAuthorize("hasAuthority('MENU_EDIT')")
-    public Result editMenuById(@RequestBody Menu menu) {
+    public Result editMenuById(@RequestBody Menu menu, String menuLevel) {
         try {
-           menuService.editMenuById(menu);
+           menuService.editMenuById(menu, menuLevel);
 
         }catch (Exception e){
             return new Result(false,MessageConstant.EDIT_Menu_FAIL);

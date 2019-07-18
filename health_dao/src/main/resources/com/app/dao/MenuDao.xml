@@ -17,18 +17,34 @@
         WHERE rm.role_id = #{roleId} and rm.menu_id = m.id and m.level = 2 and m.parentMenuId = #{parentMenuId}
     </select>
 
-    <insert id="add" parameterType="Menu">
-        insert into t_menu(name,linkUrl,path,priority,icon,description)
+    <insert id="add" parameterType="Menu" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        insert into t_menu(name,linkUrl,path,priority,icon,description,parentMenuId)
         values
-        (#{name},#{linkUrl},#{path},#{priority},#{icon},#{description})
+        (#{name},#{linkUrl},#{path},#{priority},#{icon},#{description},#{parentMenuId})
     </insert>
 
-    <select id="findPageByCondition" parameterType="string" resultType="Menu">
+    <select id="findPageByCondition" parameterType="string" resultMap="menuMap">
         SELECT * FROM t_menu
         <if test="value != null and value.length > 0">
-            where  name LIKE  #{value}
+            <where>
+                and name LIKE #{value}
+            </where>
         </if>
     </select>
+    
+    <resultMap id="menuMap" type="menu">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="linkUrl" column="linkUrl"/>
+        <result property="path" column="path"/>
+        <result property="priority" column="priority"/>
+        <result property="icon" column="icon"/>
+        <result property="description" column="description"/>
+        <result property="parentMenuId" column="parentMenuId"/>
+        <collection property="children" ofType="menu" javaType="ArrayList" column="level">
+            <id property="id" column="level"/>
+        </collection>
+    </resultMap>
 
     <delete id="deleteById" parameterType="int">
         DELETE FROM t_menu WHERE id=#{id}
@@ -53,5 +69,12 @@
     <select id="findCountByMenuId" parameterType="int" resultType="Long">
         SELECT COUNT(1) FROM t_role_menu WHERE menu_id = #{id};
     </select>
+    
+    <update id="updateChildrenMenu" parameterType="hashmap">
+        UPDATE t_menu m
+        SET
+        m.level = #{menuLevel}
+        where m.id = #{menuId}
+    </update>
 
 </mapper>

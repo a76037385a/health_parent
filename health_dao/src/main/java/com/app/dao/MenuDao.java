@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 import java.util.LinkedHashSet;
+import java.util.Map;
 
 public interface MenuDao {
 
@@ -26,4 +27,6 @@ public interface MenuDao {
     void updateMenu(Menu menu);
 
     Long findCountByMenuId(int id);
+
+    void updateChildrenMenu(Map<String, Object> map);
 }

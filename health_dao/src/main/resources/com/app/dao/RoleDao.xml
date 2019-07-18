@@ -63,7 +63,7 @@
         select * from t_permission
     </select>
 
-    <select id="findAllMenu" resultType="permission">
+    <select id="findAllMenu" resultType="menu">
         select * from t_menu
     </select>
 
