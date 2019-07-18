@@ -168,5 +168,8 @@ public class ReportController {
 
     }
 
-
+    @GetMapping("/findAllAge")
+    public Map findAllAge() {
+        return reportService.findAllAge();
+    }
 }

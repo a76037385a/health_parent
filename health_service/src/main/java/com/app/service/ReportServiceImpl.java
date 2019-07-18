@@ -130,4 +130,19 @@ public class ReportServiceImpl implements ReportService {
         return new Result(true, MessageConstant.GET_BUSINESS_REPORT_SUCCESS, map);
     }
 
+    @Override
+    public Map findAllAge() {
+        Map<String,Object> map = new HashMap<>();
+
+        List<Map> ages = reportDao.findAllAge();
+        List<String> names = new ArrayList<>();
+        for (Map age : ages) {
+            names.add((String) age.get("name"));
+        }
+        map.put("names",names);
+        map.put("values",ages);
+        return map;
+    }
+
+
 }

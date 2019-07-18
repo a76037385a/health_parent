@@ -2,6 +2,7 @@ package com.app.dao;
 
 import com.app01.pojo.Menu;
 import com.github.pagehelper.Page;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -11,7 +12,7 @@ public interface MenuDao {
 
     LinkedHashSet<Menu> findMenusByRoleId(int roleId);
 
-    List<Menu> findMenusByMenuId(int menuid);
+    List<Menu> findMenusByMenuId(@Param("roleId") int menuid,@Param("parentMenuId") int parentMenuId );
 
     void add(Menu menu);
 
@@ -19,8 +20,7 @@ public interface MenuDao {
 
     void deleteById(int id);
 
-    Menu findMenuById(int id) ;
-
+    Menu findMenuById(int id);
 
     void updateMenu(Menu menu);
 
