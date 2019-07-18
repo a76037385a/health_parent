@@ -55,7 +55,7 @@
         },
         methods: {
             getSetmeal(){
-            var url = `/setmeal/getSetmeal.do`
+            var url = `/setmeal/getSetmeals.do`;
             axios.get(url)
             .then(resp =>{            
                 if(resp.data.flag){
