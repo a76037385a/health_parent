@@ -2,6 +2,7 @@ package com.app.controller;
 
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.app01.Utils.DateUtils.DateUtils;
 import com.app01.entity.Result;
 import com.app01.msg.MessageConstant;
 import com.app01.service.ReportService;
@@ -38,24 +39,24 @@ public class ReportController {
 
         //monthList //月份表
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.MONTH,-12);
+        calendar.add(Calendar.MONTH, -12);
 
         for (int i = 0; i < 12; i++) {
-            calendar.add(Calendar.MONTH,1);
+            calendar.add(Calendar.MONTH, 1);
             monthList.add(new SimpleDateFormat("yyyy-MM").format(calendar.getTime()).toString());
         }
-        map.put("months",monthList);
-        
+        map.put("months", monthList);
+
         //countMonthList //用户统计结果表
         for (String s : monthList) {
             String month = s + "-31";
             //countDao
-            int monthCount =  reportService.countUserByMonth(s);
+            int monthCount = reportService.countUserByMonth(s);
             countMonthList.add(monthCount);
         }
-        map.put("count",countMonthList);
+        map.put("count", countMonthList);
 
-        return new Result(true, MessageConstant.GET_MEMBER_NUMBER_REPORT_SUCCESS,map);
+        return new Result(true, MessageConstant.GET_MEMBER_NUMBER_REPORT_SUCCESS, map);
     }
 
     @GetMapping("/getSetmealReport")
@@ -70,11 +71,11 @@ public class ReportController {
             String name = (String) map1.get("name");
             names.add(name);
         }
-        map.put("names",names);
+        map.put("names", names);
         //packgeCount  [ {"name":"套餐1","value":10}, {"name":"套餐1","value":10}]
-        map.put("values",countByPackageName);
+        map.put("values", countByPackageName);
 
-        return new Result(true,MessageConstant.GET_SETMEAL_COUNT_REPORT_SUCCESS,map);
+        return new Result(true, MessageConstant.GET_SETMEAL_COUNT_REPORT_SUCCESS, map);
 
     }
 
@@ -82,8 +83,8 @@ public class ReportController {
     public Result getBusinessReportData() {
         try {
             return reportService.getBusinessReportData();
-        }catch (Exception e){
-            return new Result(false,MessageConstant.GET_BUSINESS_REPORT_FAIL);
+        } catch (Exception e) {
+            return new Result(false, MessageConstant.GET_BUSINESS_REPORT_FAIL);
         }
     }
 
@@ -91,11 +92,10 @@ public class ReportController {
     public Result exportBusinessReport(HttpServletRequest request, HttpServletResponse response) throws Exception {
         try {
             //获得文件路径
-            String reapPath = request.getSession().getServletContext().getRealPath("template") +File.separator +"report_template.xlsx";
+            String reapPath = request.getSession().getServletContext().getRealPath("template") + File.separator + "report_template.xlsx";
 
 
-
-            Map<String , Object> map = (Map<String, Object>) reportService.getBusinessReportData().getData();
+            Map<String, Object> map = (Map<String, Object>) reportService.getBusinessReportData().getData();
 
             //取出返回结果数据，准备将报表数据写入到Excel文件中
             String reportDate = (String) map.get("reportDate");
@@ -145,7 +145,7 @@ public class ReportController {
                 Long total = (Long) map1.get("total");
                 String percent = (String) map1.get("percent");
 
-                row = sheet.getRow(rowNum ++);
+                row = sheet.getRow(rowNum++);
                 row.getCell(4).setCellValue(name);
                 row.getCell(5).setCellValue(total);
                 row.getCell(6).setCellValue(percent);
@@ -161,11 +161,42 @@ public class ReportController {
             xssfWorkbook.close();
 
             return null;
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-            return new Result(false,MessageConstant.GET_BUSINESS_REPORT_FAIL);
+            return new Result(false, MessageConstant.GET_BUSINESS_REPORT_FAIL);
         }
 
+    }
+
+    @GetMapping("/countUserDynamic")
+    public Result countUserDynamic(String startDate, String endDate) {
+
+        Map<String, List> map = new HashMap<>();
+        List<String> monthList = null;
+        List<Integer> countMonthList = new ArrayList<>();
+
+        //monthList //月份表
+        try {
+            monthList = DateUtils.getMonthBetween(startDate, endDate, "yyyy-MM");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Result(false, "日期有误，请重新选择");
+        }
+
+        map.put("months", monthList);
+
+        //countMonthList //用户统计结果表
+        if (monthList != null && monthList.size() > 0) {
+            for (String s : monthList) {
+                String month = s + "-31";
+                //countDao
+                int monthCount = reportService.countUserByMonth(s);
+                countMonthList.add(monthCount);
+            }
+            map.put("count", countMonthList);
+        }
+
+        return new Result(true, MessageConstant.GET_MEMBER_NUMBER_REPORT_SUCCESS, map);
     }
 
     @GetMapping("/findAllAge")

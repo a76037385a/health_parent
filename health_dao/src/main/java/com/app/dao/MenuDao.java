@@ -12,7 +12,7 @@ public interface MenuDao {
 
     LinkedHashSet<Menu> findMenusByRoleId(int roleId);
 
-    List<Menu> findMenusByMenuId(@Param("roleId") int menuid,@Param("parentMenuId") int parentMenuId );
+    List<Menu> findMenusByMenuId(@Param("roleId") int menuid, @Param("parentMenuId") int parentMenuId);
 
     void add(Menu menu);
 
@@ -20,7 +20,8 @@ public interface MenuDao {
 
     void deleteById(int id);
 
-    Menu findMenuById(int id);
+    Menu findMenuById(int id) ;
+
 
     void updateMenu(Menu menu);
 

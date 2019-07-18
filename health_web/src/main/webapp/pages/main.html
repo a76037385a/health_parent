@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <!-- 页面meta -->
     <meta charset="utf-8">
@@ -14,21 +13,20 @@
     <link rel="stylesheet" href="../plugins/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="../css/style.css">
     <style type="text/css">
-        .el-main {
-            position: absolute;
-            top: 70px;
-            bottom: 0px;
-            left: 200px;
-            right: 10px;
-            padding: 0;
-        }
+    .el-main{
+        position: absolute;
+        top: 70px;
+        bottom: 0px;
+        left: 200px;
+        right: 10px;
+        padding: 0;
+    }
     </style>
 </head>
-
 <body class="hold-transition skin-purple sidebar-mini">
     <div id="app">
         <el-container>
-            <el-header class="main-header" style="height:70px;">
+            <el-header  class="main-header" style="height:70px;">
                 <nav class="navbar navbar-static-top" :class=''>
                     <!-- Logo -->
                     <a href="#" class="logo" style="text-align:center">
@@ -46,9 +44,9 @@
                                     <span style="display:block;">修改密码</span>
                                 </el-dropdown-item>
                                 <el-dropdown-item divided>
-                                    <span style="display:block;" @click="logout">退出</span>
-
-                                </el-dropdown-item>
+                                        <span style="display:block;" @click="logout">退出</span>
+                                       
+                                    </el-dropdown-item>
                             </el-dropdown-menu>
                         </el-dropdown>
                     </div>
@@ -71,8 +69,7 @@
                     </el-menu>
                 </el-aside>
                 <el-container>
-                    <iframe name="right" class="el-main" src="ordersetting.html" width="100%" height="580px"
-                        frameborder="0"></iframe>
+                    <iframe name="right" class="el-main" src="ordersetting.html" width="100%" height="580px" frameborder="0"></iframe>
                 </el-container>
             </el-container>
         </el-container>
@@ -86,201 +83,199 @@
 <script>
     new Vue({
         el: '#app',
-        data: {
-            username: "",
-            menuList: [
+        data:{
+            username:"",
+            menuList:[
                 {
                     "path": "1",
                     "title": "工作台",
-                    "icon": "fa-dashboard",
+                    "icon":"fa-dashboard",
                     "children": []
                 },
                 {
                     "path": "2",
                     "title": "会员管理",
-                    "icon": "fa-user-md",
+                    "icon":"fa-user-md",
                     "children": [
                         {
                             "path": "/2-1",
                             "title": "会员档案",
-                            "linkUrl": "member.html",
-                            "children": []
+                            "linkUrl":"member.html",
+                            "children":[]
                         },
                         {
                             "path": "/2-2",
                             "title": "体检上传",
-                            "children": []
+                            "children":[]
                         },
                         {
                             "path": "/2-3",
                             "title": "会员统计",
-                            "linkUrl": "all-item-list.html",
-                            "children": []
+                            "linkUrl":"all-item-list.html",
+                            "children":[]
                         },
                     ]
                 },
                 {
                     "path": "3",
                     "title": "预约管理",
-                    "icon": "fa-tty",
+                    "icon":"fa-tty",
                     "children": [
                         {
                             "path": "/3-1",
                             "title": "预约列表",
-                            "linkUrl": "ordersettinglist.html",
-                            "children": []
+                            "linkUrl":"ordersettinglist.html",
+                            "children":[]
                         },
                         {
                             "path": "/3-2",
                             "title": "预约设置",
-                            "linkUrl": "/pages/ordersetting.html",
-                            "children": []
+                            "linkUrl":"/pages/ordersetting.html",
+                            "children":[]
                         },
                         {
                             "path": "/3-3",
                             "title": "套餐管理",
-                            "linkUrl": "/pages/setmeal.html",
-                            "children": []
+                            "linkUrl":"/pages/setmeal.html",
+                            "children":[]
                         },
                         {
                             "path": "/3-4",
                             "title": "检查组管理",
-                            "linkUrl": "/pages/checkgroup.html",
-                            "children": []
+                            "linkUrl":"/pages/checkgroup.html",
+                            "children":[]
                         },
                         {
                             "path": "/3-5",
                             "title": "检查项管理",
-                            "linkUrl": "/pages/checkitem.html",
-                            "children": []
+                            "linkUrl":"/pages/checkitem.html",
+                            "children":[]
                         },
                     ]
                 },
                 {
                     "path": "4",
                     "title": "健康评估",
-                    "icon": "fa-stethoscope",
-                    "children": [
+                    "icon":"fa-stethoscope",
+                    "children":[
                         {
                             "path": "/4-1",
                             "title": "中医体质辨识",
-                            "linkUrl": "all-medical-list.html",
-                            "children": []
+                            "linkUrl":"all-medical-list.html",
+                            "children":[]
                         },
                     ]
                 },
                 {
                     "path": "5",     //菜单项所对应的路由路径
                     "title": "统计分析",     //菜单项名称
-                    "icon": "fa-heartbeat",
-                    "children": [//是否有子菜单，若没有，则为[]
+                    "icon":"fa-heartbeat",
+                    "children":[//是否有子菜单，若没有，则为[]
                         {
                             "path": "/5-1",
                             "title": "工作量统计",
-                            "linkUrl": "all-medical-list.html",
-                            "children": []
+                            "linkUrl":"all-medical-list.html",
+                            "children":[]
                         },
                         {
                             "path": "/5-2",
                             "title": "套餐占比",
-                            "linkUrl": "report_setmeal.html",
-                            "children": []
+                            "linkUrl":"report_setmeal.html",
+                            "children":[]
                         },
                         {
                             "path": "/5-3",
                             "title": "运营数据",
-                            "linkUrl": "report_business.html",
-                            "children": []
+                            "linkUrl":"report_business.html",
+                            "children":[]
                         }
                     ]
                 },
                 {
                     "path": "6",     //菜单项所对应的路由路径
                     "title": "系统设置",     //菜单项名称
-                    "icon": "fa-heartbeat",
-                    "children": [//是否有子菜单，若没有，则为[]
+                    "icon":"fa-heartbeat",
+                    "children":[//是否有子菜单，若没有，则为[]
                         {
                             "path": "/6-1",
                             "title": "菜单管理",
-                            "linkUrl": "menu.html",
-                            "children": []
+                            "linkUrl":"menu.html",
+                            "children":[]
                         },
                         {
                             "path": "/6-2",
                             "title": "权限管理",
-                            "linkUrl": "permission.html",
-                            "children": []
+                            "linkUrl":"permission.html",
+                            "children":[]
                         },
                         {
                             "path": "/6-3",
                             "title": "角色管理",
-                            "linkUrl": "role.html",
-                            "children": []
+                            "linkUrl":"role.html",
+                            "children":[]
                         },
                         {
                             "path": "/6-4",
                             "title": "用户管理",
-                            "linkUrl": "user.html",
-                            "children": []
+                            "linkUrl":"user.html",
+                            "children":[]
                         }
                     ]
                 }
-
             ]
         },
         mounted() {
-
+          
         },
         created() {
             this.getUsername()
         },
         methods: {
 
-            getUsername() {
+            getUsername(){
                 var url = `/user/getUsername.do`
 
                 axios.get(url)
-                    .then(resp => {
-                        console.log(resp)
-                        if (resp.data.flag) {
-                            this.username = resp.data.data;
-                            this.getUserMenuByUsername();
-                        } else {
-                            this.$message.error("返回错误")
-                        }
-                    })
-                    .catch(err => {
-                        console.log(err)
-                        this.$message.error("请求错误")
-                    })
+                .then( resp=>{
+                    console.log(resp)
+                    if(resp.data.flag){
+                        this.username = resp.data.data;
+                        this.getUserMenuByUsername();
+                    }else{
+                        this.$message.error("返回错误")
+                    }
+                })
+                .catch( err=>{
+                    console.log(err)
+                    this.$message.error("请求错误")
+                } )
 
             },
-            getUserMenuByUsername() {
+            getUserMenuByUsername(){
                 var url = `/user/getUserMenuByUsername.do?name=${this.username}`
                 axios.get(url)
-                    .then(resp => {
-                        if (resp.data.flag) {
-                            console.log(resp.data.data)
-                            this.menuList = resp.data.data
-                        } else {
-                            this.$message.error(resp.data.message)
-                        }
-                    })
-                    .catch(err => {
-                        this.$message.error('网络请求发生错误,请稍后重试')
-                    })
+                .then( resp=>{
+                    if(resp.data.flag){
+                        console.log(resp.data.data)
+                        this.menuList = resp.data.data
+                    }else{
+                        this.$message.error(resp.data.message)
+                    }
+                })
+                .catch(err=>{
+                    this.$message.error('网络请求发生错误,请稍后重试')
+                })
             },
 
 
-            logout() {
+            logout(){
                 window.location.href = "../logout.do"
             }
         }
     });
-    $(function () {
-        var wd = 200;
-        $(".el-main").css('width', $('body').width() - wd + 'px');
+    $(function() {
+            var wd = 200;
+            $(".el-main").css('width', $('body').width() - wd + 'px');
     });
 </script>
-
 </html>

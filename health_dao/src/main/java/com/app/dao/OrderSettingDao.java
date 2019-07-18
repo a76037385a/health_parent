@@ -17,4 +17,7 @@ public interface OrderSettingDao {
 
 
     void updateReservations(OrderSetting orderSetting);
+
+
+    void delete(String format);
 }
