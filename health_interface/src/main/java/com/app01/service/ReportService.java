@@ -14,4 +14,8 @@ public interface ReportService {
 
     Result getBusinessReportData() throws Exception;
 
+    Map findAllAge();
+
+
+
 }

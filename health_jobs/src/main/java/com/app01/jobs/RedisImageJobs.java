@@ -12,6 +12,9 @@ public class RedisImageJobs {
     @Autowired
     JedisPool jedisPool;
 
+
+
+
     public void cleanTempImage() {
         System.out.println("start cleanTempImageing......");
 

@@ -8,4 +8,6 @@ public interface ReportDao {
     Integer countUserByMonth(String date);
 
     List<Map> countByPackageName();
+
+    List<Map> findAllAge();
 }

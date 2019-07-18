@@ -199,5 +199,8 @@ public class ReportController {
         return new Result(true, MessageConstant.GET_MEMBER_NUMBER_REPORT_SUCCESS, map);
     }
 
-
+    @GetMapping("/findAllAge")
+    public Map findAllAge() {
+        return reportService.findAllAge();
+    }
 }
