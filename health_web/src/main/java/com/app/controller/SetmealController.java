@@ -12,6 +12,7 @@ import com.app01.pojo.CheckGroup;
 import com.app01.pojo.Package;
 import com.app01.redis.RedisConstant;
 import com.app01.service.SetmealService;
+import com.sun.xml.internal.xsom.impl.scd.Iterators;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.parameters.P;
@@ -20,9 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import redis.clients.jedis.JedisPool;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @RestController
 @RequestMapping("/setmeal")
@@ -83,5 +82,32 @@ public class SetmealController {
             return new Result(false,MessageConstant.ADD_SETMEAL_FAIL);
         }
         return new Result(true,MessageConstant.ADD_SETMEAL_SUCCESS);
+    }
+    @GetMapping("/getSetmealReport")
+    public  Result getSetmealReport(){
+        try {
+            List<Map> maps = setmealService.getSetmealReport();
+            System.out.println(maps);
+            List<Map> newmap = new ArrayList<>();
+            // [ {"name":"套餐1","value":10}, {"name":"套餐1","value":10}]
+            for (Map map : maps) {
+            HashMap<String, Object> hashMap = new HashMap<>();
+              String name =   (String) map.get("name");
+              if(name.equals("1")){
+                  name = "男";
+              }else{
+                  name = "女";
+              }
+              hashMap.put("name",name);
+              hashMap.put("value",map.get("value"));
+              newmap.add(hashMap);
+            }
+
+            return  new Result(true,MessageConstant.ADD_CHECKGROUP_SUCCESS,newmap);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return  new Result(false,MessageConstant.ADD_CHECKGROUP_FAIL);
+        }
+
     }
 }

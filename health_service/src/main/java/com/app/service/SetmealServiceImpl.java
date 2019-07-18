@@ -13,10 +13,10 @@ import com.app01.service.SetmealService;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 import redis.clients.jedis.JedisPool;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class SetmealServiceImpl implements SetmealService{
@@ -103,6 +103,11 @@ public class SetmealServiceImpl implements SetmealService{
         Package pac = setmealDao.findPackgeByid(id);
         pac.setImg(CloudKeys.domain + pac.getImg());
         return pac;
+    }
+
+    public List<Map> getSetmealReport() {
+        List<Map> maps = setmealDao.getSetmealReport();
+        return maps;
     }
 
 

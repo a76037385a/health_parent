@@ -7,6 +7,7 @@ import com.app01.pojo.Package;
 import com.sun.xml.internal.bind.v2.runtime.reflect.Lister;
 
 import java.util.List;
+import java.util.Map;
 
 public interface SetmealService {
 
@@ -23,5 +24,5 @@ public interface SetmealService {
     Package findPackgeByid(int id);
 
 
-
+    List<Map>  getSetmealReport();
 }

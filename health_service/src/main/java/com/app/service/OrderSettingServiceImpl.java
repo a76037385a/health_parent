@@ -9,10 +9,8 @@ import com.app01.service.OrderSettingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Service(interfaceClass = OrderSettingService.class)
 public class OrderSettingServiceImpl implements OrderSettingService{
@@ -61,6 +59,13 @@ public class OrderSettingServiceImpl implements OrderSettingService{
         List<OrderSetting> list = new ArrayList<>();
         list.add(orderByNumber);
         addOrderSetting(list);
+    }
+
+    @Override
+    public void delete(Date date) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYY-MM-dd");
+        String format = simpleDateFormat.format(date);
+        orderSettingDao.delete(format);
     }
 
 
