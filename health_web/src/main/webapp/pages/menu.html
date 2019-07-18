@@ -16,153 +16,179 @@
 </head>
 
 <body class="hold-transition">
-    <div id="app">
-        <div class="content-header">
-            <h1>后台管理<small>菜单管理</small></h1>
-            <el-breadcrumb separator-class="el-icon-arrow-right" class="breadcrumb">
-                <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-                <el-breadcrumb-item>后台管理</el-breadcrumb-item>
-                <el-breadcrumb-item>菜单管理</el-breadcrumb-item>
-            </el-breadcrumb>
-        </div>
-        <div class="app-container">
-            <div class="box">
-                <div class="filter-container">
-                    <el-input placeholder="菜单名称" v-model="pagination.queryString" style="width: 200px;"
-                        class="filter-item"></el-input>
-                    <el-button @click="findPage()" class="dalfBut">查询</el-button>
-                    <el-button type="primary" class="butT" @click="handleCreate()">新建</el-button>
-                </div>
-                <el-table size="small" current-row-key="id" :data="dataList" stripe highlight-current-row>
-                    <el-table-column type="index" align="center" label="序号"></el-table-column>
-                    <el-table-column prop="name" label="菜单名称" align="center"></el-table-column>
-                    <el-table-column prop="linkUrl" label="菜单访问路径" align="center"></el-table-column>
-                    <el-table-column prop="path" label="菜单项所对应的路由路径" align="center"></el-table-column>
-                    <el-table-column prop="priority" label="菜单优先级" align="center"></el-table-column>
-                    <el-table-column prop="decription" label="菜单描述" align="center"></el-table-column>
-                    <el-table-column prop="icon" label="菜单图标" align="center"></el-table-column>
-                    <el-table-column label="操作" align="center">
-                        <template slot-scope="scope">
-                            <el-button type="primary" size="mini" @click="handleEdit(scope.row)">编辑</el-button>
-                            <el-button size="mini" type="danger" @click="handleDelete(scope.row)">删除</el-button>
-                        </template>
-                    </el-table-column>
-                </el-table>
-                <div class="pagination-container">
-                    <el-pagination class="pagiantion" @current-change="handleCurrentChange"
-                        :current-page="pagination.currentPage" :page-size="pagination.pageSize"
-                        layout="total, prev, pager, next, jumper" :total="pagination.total">
-                    </el-pagination>
-                </div>
-                <!-- 新增标签弹层 -->
-                <div class="add-form">
-                    <el-dialog title="新增菜单" :visible.sync="dialogFormVisible">
-                        <el-form ref="dataAddForm" :model="formData" :rules="rules" label-position="right"
-                            label-width="100px">
-                            <el-row>
-                                <el-col :span="12">
-                                    <el-form-item label="菜单名称" prop="name">
-                                        <el-input v-model="formData.name" />
-                                    </el-form-item>
-                                </el-col>
-                                <el-col :span="12">
-                                    <el-form-item label="菜单访问路径" prop="linkUrl">
-                                        <el-input v-model="formData.linkUrl" />
-                                    </el-form-item>
-                                </el-col>
-                            </el-row>
-                            <el-row>
-                                <el-col :span="24">
-                                    <el-form-item label="菜单项所对应的路由路径">
-                                        <el-input v-model="formData.path" />
-                                    </el-form-item>
-                                </el-col>
-                            </el-row>
-                            <el-row>
-                                <el-col :span="24">
-                                    <el-form-item label="菜单优先级">
-                                        <el-input v-model="formData.priority" />
-                                    </el-form-item>
-                                </el-col>
-                            </el-row>
-                            <el-row>
-                                <el-col :span="24">
-                                    <el-form-item label="菜单图标">
-                                        <el-input v-model="formData.icon" />
-                                    </el-form-item>
-                                </el-col>
-                            </el-row>
-                            <el-row>
-                                <el-col :span="24">
-                                    <el-form-item label="菜单描述">
-                                        <el-input v-model="formData.description" type="textarea"></el-input>
-                                    </el-form-item>
-                                </el-col>
-                            </el-row>
-                        </el-form>
-                        <div slot="footer" class="dialog-footer">
-                            <el-button @click="dialogFormVisible = false">取消</el-button>
-                            <el-button type="primary" @click="handleAdd()">确定</el-button>
-                        </div>
-                    </el-dialog>
-                </div>
+<div id="app">
+    <div class="content-header">
+        <h1>后台管理
+            <small>菜单管理</small>
+        </h1>
+        <el-breadcrumb separator-class="el-icon-arrow-right" class="breadcrumb">
+            <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+            <el-breadcrumb-item>后台管理</el-breadcrumb-item>
+            <el-breadcrumb-item>菜单管理</el-breadcrumb-item>
+        </el-breadcrumb>
+    </div>
+    <div class="app-container">
+        <div class="box">
+            <div class="filter-container">
+                <el-input placeholder="菜单名称" v-model="pagination.queryString" style="width: 200px;"
+                          class="filter-item"></el-input>
+                <el-button @click="findPage(1)" class="dalfBut">查询</el-button>
+                <el-button type="primary" class="butT" @click="handleCreate()">新建</el-button>
+            </div>
+            <el-table size="small" current-row-key="id" :data="dataList" stripe highlight-current-row>
+                <el-table-column type="index" align="center" label="序号"></el-table-column>
+                <el-table-column prop="name" label="菜单名称" align="center"></el-table-column>
+                <el-table-column prop="linkUrl" label="菜单访问路径" align="center"></el-table-column>
+                <el-table-column prop="path" label="菜单项所对应的路由路径" align="center"></el-table-column>
+                <el-table-column prop="priority" label="菜单优先级" align="center"></el-table-column>
+                <el-table-column prop="description" label="菜单描述" align="center"></el-table-column>
+                <el-table-column prop="icon" label="菜单图标" align="center"></el-table-column>
+                <el-table-column prop="parentMenuId" label="父菜单Id" align="center"></el-table-column>
+                <el-table-column prop="children[0].id" label="菜单层级" align="center"></el-table-column>
+                <el-table-column label="操作" align="center">
+                    <template slot-scope="scope">
+                        <el-button type="primary" size="mini" @click="handleEdit(scope.row)">编辑</el-button>
+                        <el-button size="mini" type="danger" @click="handleDelete(scope.row)">删除</el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+            <div class="pagination-container">
+                <el-pagination class="pagiantion" @current-change="handleCurrentChange"
+                               :current-page="pagination.currentPage" :page-size="pagination.pageSize"
+                               layout="total, prev, pager, next, jumper" :total="pagination.total">
+                </el-pagination>
+            </div>
+            <!-- 新增标签弹层 -->
+            <div class="add-form">
+                <el-dialog title="新增菜单" :visible.sync="dialogFormVisible">
+                    <el-form ref="dataAddForm" :model="formData" :rules="rules" label-position="right"
+                             label-width="100px">
+                        <el-row>
+                            <el-col :span="12">
+                                <el-form-item label="菜单名称" prop="name">
+                                    <el-input v-model="formData.name"/>
+                                </el-form-item>
+                            </el-col>
+                            <el-col :span="12">
+                                <el-form-item label="菜单访问路径" prop="linkUrl">
+                                    <el-input v-model="formData.linkUrl"/>
+                                </el-form-item>
+                            </el-col>
+                        </el-row>
+                        <el-row>
+                            <el-col :span="12">
+                                <el-form-item label="菜单项所对应的路由路径">
+                                    <el-input v-model="formData.path"/>
+                                </el-form-item>
+                            </el-col>
+                            <el-col :span="12">
+                                <el-form-item label="菜单优先级">
+                                    <el-input v-model="formData.priority"/>
+                                </el-form-item>
+                            </el-col>
+                        </el-row>
+                        <el-row>
+                            <el-col :span="24">
+                                <el-form-item label="菜单图标">
+                                    <el-input v-model="formData.icon"/>
+                                </el-form-item>
+                            </el-col>
+                        </el-row>
+                        <el-row>
+                            <el-col :span="24">
+                                <el-form-item label="菜单描述">
+                                    <el-input v-model="formData.description" type="textarea"></el-input>
+                                </el-form-item>
+                            </el-col>
+                        </el-row>
+                        <el-row>
+                            <el-form-item label="菜单层级">
+                                <el-select v-model="menuLevel">
+                                    <el-option label="1" value="1"></el-option>
+                                    <el-option label="2" value="2"></el-option>
+                                </el-select>
+                            </el-form-item>
+                            <el-col :span="12">
+                                <el-form-item label="父菜单Id">
+                                    <el-input v-model="formData.parentMenuId"/>
+                                </el-form-item>
+                            </el-col>
+                        </el-row>
+                    </el-form>
+                    <div slot="footer" class="dialog-footer">
+                        <el-button @click="dialogFormVisible = false">取消</el-button>
+                        <el-button type="primary" @click="handleAdd()">确定</el-button>
+                    </div>
+                </el-dialog>
+            </div>
 
-                <!-- 编辑标签弹层 -->
-                <div class="add-form">
-                    <el-dialog title="编辑菜单" :visible.sync="dialogFormVisible4Edit">
-                        <el-form ref="dataEditForm" :model="formData" :rules="rules" label-position="right"
-                            label-width="100px">
-                            <el-row>
-                                <el-col :span="12">
-                                    <el-form-item label="菜单名称" prop="name">
-                                        <el-input v-model="formData.name" />
-                                    </el-form-item>
-                                </el-col>
-                                <el-col :span="12">
-                                    <el-form-item label="菜单访问路径" >
-                                        <el-input v-model="formData.linkUrl" />
-                                    </el-form-item>
-                                </el-col>
-                            </el-row>
-                            <el-row>
-                                <el-col :span="24">
-                                    <el-form-item label="菜单项所对应的路由路径">
-                                        <el-input v-model="formData.path" />
-                                    </el-form-item>
-                                </el-col>
-                            </el-row>
-                            <el-row>
-                                <el-col :span="24">
-                                    <el-form-item label="菜单优先级">
-                                        <el-input v-model="formData.priority" />
-                                    </el-form-item>
-                                </el-col>
-                            </el-row>
-                            <el-row>
-                                <el-col :span="24">
-                                    <el-form-item label="菜单图标">
-                                        <el-input v-model="formData.icon" type="textarea"/>
-                                    </el-form-item>
-                                </el-col>
-                            </el-row>
-                            <el-row>
-                                <el-col :span="24">
-                                    <el-form-item label="菜单描述">
-                                        <el-input v-model="formData.description" type="textarea"></el-input>
-                                    </el-form-item>
-                                </el-col>
-                            </el-row>
+            <!-- 编辑标签弹层 -->
+            <div class="add-form">
+                <el-dialog title="编辑菜单" :visible.sync="dialogFormVisible4Edit">
+                    <el-form ref="dataEditForm" :model="formData" :rules="rules" label-position="right"
+                             label-width="100px">
+                        <el-row>
+                            <el-col :span="12">
+                                <el-form-item label="菜单名称" prop="name">
+                                    <el-input v-model="formData.name"/>
+                                </el-form-item>
+                            </el-col>
+                            <el-col :span="12">
+                                <el-form-item label="菜单访问路径" prop="linkUrl">
+                                    <el-input v-model="formData.linkUrl"/>
+                                </el-form-item>
+                            </el-col>
+                        </el-row>
+                        <el-row>
+                            <el-col :span="12">
+                                <el-form-item label="菜单项所对应的路由路径">
+                                    <el-input v-model="formData.path"/>
+                                </el-form-item>
+                            </el-col>
+                            <el-col :span="12">
+                                <el-form-item label="菜单优先级">
+                                    <el-input v-model="formData.priority"/>
+                                </el-form-item>
+                            </el-col>
+                        </el-row>
+                        <el-row>
+                            <el-col :span="24">
+                                <el-form-item label="菜单图标">
+                                    <el-input v-model="formData.icon"/>
+                                </el-form-item>
+                            </el-col>
+                        </el-row>
+                        <el-row>
+                            <el-col :span="24">
+                                <el-form-item label="菜单描述">
+                                    <el-input v-model="formData.description" type="textarea"></el-input>
+                                </el-form-item>
+                            </el-col>
+                        </el-row>
+                        <el-row>
+                            <el-form-item label="菜单层级">
+                                <el-select v-model="menuLevel">
+                                    <el-option label="1" value="1"></el-option>
+                                    <el-option label="2" value="2"></el-option>
+                                </el-select>
+                            </el-form-item>
+                            <el-col :span="12">
+                                <el-form-item label="父菜单Id">
+                                    <el-input v-model="formData.parentMenuId"/>
+                                </el-form-item>
+                            </el-col>
+                        </el-row>
 
-                        </el-form>
-                        <div slot="footer" class="dialog-footer">
-                            <el-button @click="dialogFormVisible4Edit = false">取消</el-button>
-                            <el-button type="primary" @click="handleUpdate()">确定</el-button>
-                        </div>
-                    </el-dialog>
-                </div>
+                    </el-form>
+                    <div slot="footer" class="dialog-footer">
+                        <el-button @click="dialogFormVisible4Edit = false">取消</el-button>
+                        <el-button type="primary" @click="handleUpdate()">确定</el-button>
+                    </div>
+                </el-dialog>
             </div>
         </div>
     </div>
+</div>
 </body>
 <!-- 引入组件库 -->
 <script src="../js/vue.js"></script>
@@ -183,8 +209,9 @@
             formData: {},//表单数据
             dialogFormVisible: false,//增加表单是否可见，即是否弹出添加窗口
             dialogFormVisible4Edit: false,//修改表单是否可见，即是否弹出修改窗口
+            menuLevel: '',
             rules: {//校验规则
-                name: [{ required: true, message: '菜单名称为必填项', trigger: 'blur' }],
+                name: [{required: true, message: '菜单名称为必填项', trigger: 'blur'}],
 
             }
         },
@@ -202,11 +229,11 @@
             handleAdd() {
                 this.$refs['dataAddForm'].validate((valid) => {
                     // 所有验证通过后才会为true,只要有一个失败就是false
-                    
+
                     if (valid) {
-                        
+
                         // 发送ajax axios
-                        axios.post('/menu/add.do', this.formData).then(res => {
+                        axios.post('/menu/add.do?menuLevel='+this.menuLevel, this.formData).then(res => {
                             // res.data  {flag:ture,message:'',data:{}}
                             this.$message({
                                 message: res.data.message,
@@ -237,10 +264,10 @@
                 this.formData = {}
             },
             // 分页查询
-            findPage() {
+            findPage(page) {
                 //分页参数
                 var param = {
-                    currentPage: this.pagination.currentPage,//页码
+                    currentPage: page == null ? this.pagination.currentPage : page,//页码
                     pageSize: this.pagination.pageSize,//每页显示的记录数
                     queryString: this.pagination.queryString//查询条件
                 };
@@ -254,11 +281,11 @@
             // 删除
             handleDelete(row) {
                 // alert(`/checkitem/deleteRow.do?id=${row.id}`)
-                this.$confirm("确认删除吗？", "提示", { type: 'warning' }).then(() => {
+                this.$confirm("确认删除吗？", "提示", {type: 'warning'}).then(() => {
                     //点击确定按钮时只需此处代码
                     //alert('用户点击的是确定按钮');
                     axios.get(`/menu/deleteRow.do?id=${row.id}`)
-                        .then( res => {
+                        .then(res => {
                             if (!res.data.flag) {
                                 //删除失败
                                 this.$message.error(res.data.message);
@@ -272,7 +299,7 @@
                                 this.findPage();
                             }
                         })
-                        .catch(err =>{
+                        .catch(err => {
                             this.showSecurity(err)
                         })
                 })
@@ -284,13 +311,13 @@
             // 弹出修改窗口
             handleEdit(row) {
                 // alert(row.id)
-                
+
                 axios.get(`/menu/findById.do?id=${row.id}`)
                     .then(resp => {
                         if (resp.data.flag) {
                             this.dialogFormVisible4Edit = true;
                             this.formData = resp.data.data;
-                            
+
                         } else {
                             this.$message.error('获取失败,请刷新当前页面')
                         }
@@ -298,7 +325,7 @@
                     .catch(err => {
                         this.$message.error('获取失败,请联系管理员')
                     })
-                
+
             },
             // 修改数据后提交
             handleUpdate(row) {
@@ -306,7 +333,7 @@
                     if (valid) {
                         console.log("update")
                         console.log(this.formData)
-                        axios.post(`/menu/editMenuById.do`, this.formData)
+                        axios.post('/menu/editMenuById.do?menuLevel='+this.menuLevel, this.formData)
                             .then(resp => {
                                 if (resp.data.flag) {
                                     this.dialogFormVisible4Edit = false;
@@ -331,26 +358,26 @@
 
                 })
 
-                
+
             },
             // 切换页码时，需要刷新列表
             handleCurrentChange(currentPage) {
                 this.pagination.currentPage = currentPage;
                 this.findPage();
             },
-            showSecurity(error){
+            showSecurity(error) {
                 //console.log(error.response.data);//返回单额body
                 //console.log(error.response.headers);//返回的响应头
 
                 var status = error.response.status;//状态码
 
-                if(status == 403 ){
+                if (status == 403) {
                     this.$message.error('未获得权限,请联系管理员开通')
-                }else{
+                } else {
                     this.$message.error('发送错误,请联系管理员')
                 }
 
-                
+
             }
         }
     })
