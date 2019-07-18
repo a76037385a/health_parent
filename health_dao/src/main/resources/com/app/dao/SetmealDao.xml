@@ -94,5 +94,9 @@
     </select>
 
 
+    <select id="getSetmealReport" resultType="Map">
+        SELECT sex as name,count(1) as value FROM t_member GROUP BY sex
+    </select>
+
     
 </mapper>

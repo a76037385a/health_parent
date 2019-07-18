@@ -25,6 +25,7 @@ import redis.clients.jedis.JedisPool;
 
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class SetmealServiceImpl implements SetmealService{
@@ -160,6 +161,11 @@ public class SetmealServiceImpl implements SetmealService{
 
 
         return pac;
+    }
+
+    public List<Map> getSetmealReport() {
+        List<Map> maps = setmealDao.getSetmealReport();
+        return maps;
     }
 
 

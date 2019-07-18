@@ -7,6 +7,7 @@ import com.app01.pojo.CheckGroup;
 import com.app01.pojo.Package;
 
 import java.util.List;
+import java.util.Map;
 
 public interface SetmealService {
 
@@ -26,5 +27,5 @@ public interface SetmealService {
     Package findPackgeByid(int id);
 
 
-
+    List<Map>  getSetmealReport();
 }

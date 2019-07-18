@@ -34,4 +34,8 @@
           orderDate=#{orderDate}
     </update>
 
+    <delete id="delete" >
+        DELETE from t_ordersetting where orderDate &lt; #{format}
+    </delete>
+
 </mapper>

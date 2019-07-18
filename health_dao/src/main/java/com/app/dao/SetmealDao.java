@@ -6,6 +6,7 @@ import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface SetmealDao {
 
@@ -22,4 +23,6 @@ public interface SetmealDao {
     Package findPackgeInfosById(int id);
 
     Package findPackgeByid(int id);
+
+   List<Map>  getSetmealReport();
 }
