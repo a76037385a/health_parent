@@ -19,6 +19,7 @@
 
 
     <context:component-scan base-package="com.app"></context:component-scan>
+    <context:component-scan base-package="com.app01"></context:component-scan>
     <!--http：用于定义相关权限控制
       指定哪些资源不需要进行权限校验，可以使用通配符-->
     <security:http security="none" pattern="/js/**" />
